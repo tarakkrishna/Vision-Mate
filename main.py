@@ -10,7 +10,7 @@ import random
 
 import cv2
 from plyer import notification
-from PyQt6.QtCore import Qt, QTimer
+from PyQt6.QtCore import Qt, QTimer, pyqtSignal
 from PyQt6.QtGui import QFont
 from PyQt6.QtWidgets import (
     QApplication,
@@ -857,6 +857,116 @@ class EmojiTrayWindow(QWidget):
         QToolTip.showText(global_pos, message, self, self.rect(), duration_ms)
 
 
+class BreakOverlayWindow(QWidget):
+    """Fullscreen, always-on-top overlay used for forced eye breaks.
+
+    It darkens the screen, shows a rest message and a countdown, and then
+    closes automatically after a fixed duration. The user can press ESC twice
+    quickly as an emergency shortcut to dismiss it early.
+    """
+
+    closed = pyqtSignal()
+
+    def __init__(self, duration_seconds: int = 30, parent: Optional[QWidget] = None) -> None:
+        super().__init__(parent=parent)
+
+        self._duration_seconds = max(1, int(duration_seconds))
+        self._remaining_seconds = self._duration_seconds
+        self._last_esc_time: Optional[float] = None
+
+        # Fullscreen, borderless, always on top.
+        self.setWindowFlags(
+            Qt.WindowType.FramelessWindowHint
+            | Qt.WindowType.WindowStaysOnTopHint
+        )
+        # Block interaction with the rest of the application while visible.
+        self.setWindowModality(Qt.WindowModality.ApplicationModal)
+
+        # Dark, semi-transparent background so the screen looks "disabled".
+        self.setStyleSheet("background-color: rgba(15, 23, 42, 220);")
+
+        layout = QVBoxLayout(self)
+        layout.setContentsMargins(40, 40, 40, 40)
+        layout.setSpacing(16)
+
+        layout.addStretch(1)
+
+        self._title_label = QLabel("Time to rest your eyes ")
+        self._title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        title_font = QFont("Segoe UI", 28)
+        self._title_label.setFont(title_font)
+        layout.addWidget(self._title_label)
+
+        self._message_label = QLabel("Look away from the screen for 30 seconds")
+        self._message_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        msg_font = QFont("Segoe UI", 18)
+        self._message_label.setFont(msg_font)
+        layout.addWidget(self._message_label)
+
+        self._countdown_label = QLabel("")
+        self._countdown_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        countdown_font = QFont("Segoe UI", 22)
+        self._countdown_label.setFont(countdown_font)
+        layout.addWidget(self._countdown_label)
+
+        self._hint_label = QLabel("Press ESC twice quickly to dismiss if needed")
+        self._hint_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        hint_font = QFont("Segoe UI", 12)
+        self._hint_label.setFont(hint_font)
+        layout.addWidget(self._hint_label)
+
+        layout.addStretch(1)
+
+        self._timer = QTimer(self)
+        self._timer.setInterval(1000)
+        self._timer.timeout.connect(self._on_tick)
+
+    def showEvent(self, event) -> None:  # noqa: D401
+        """Start the countdown when the overlay becomes visible."""
+
+        super().showEvent(event)
+        self._remaining_seconds = self._duration_seconds
+        self._update_countdown_label()
+        if not self._timer.isActive():
+            self._timer.start()
+        # Optional: soft sound at break start.
+        QApplication.beep()
+
+    def closeEvent(self, event) -> None:  # noqa: D401
+        """Ensure timer is stopped and notify listeners when closing."""
+
+        if self._timer.isActive():
+            self._timer.stop()
+        self.closed.emit()
+        super().closeEvent(event)
+
+    def keyPressEvent(self, event) -> None:  # noqa: D401
+        """Handle ESC key as an emergency double-press exit."""
+
+        if event.key() == Qt.Key.Key_Escape:
+            now = time.time()
+            if self._last_esc_time is not None and (now - self._last_esc_time) < 1.5:
+                # Second ESC within 1.5 seconds -> dismiss overlay.
+                self.close()
+                return
+            self._last_esc_time = now
+        else:
+            super().keyPressEvent(event)
+
+    def _on_tick(self) -> None:
+        self._remaining_seconds -= 1
+        if self._remaining_seconds <= 0:
+            self._update_countdown_label()
+            # Optional: soft sound at break end.
+            QApplication.beep()
+            self.close()
+        else:
+            self._update_countdown_label()
+
+    def _update_countdown_label(self) -> None:
+        self._countdown_label.setText(f"Break ends in {self._remaining_seconds} s")
+
+
 class VisionMateWindow(QWidget):
     """Main desktop application window and controller (PyQt)."""
 
@@ -875,6 +985,7 @@ class VisionMateWindow(QWidget):
         self.tray_window: Optional[EmojiTrayWindow] = None
         self.stats_page: Optional[StatsDashboardWindow] = None
         self.eye_test_page: Optional[EyeTestPage] = None
+        self.break_overlay: Optional[BreakOverlayWindow] = None
 
         self.current_emoji = "😴"
 
@@ -1142,6 +1253,25 @@ class VisionMateWindow(QWidget):
         if hasattr(self, "bubble_label") and self.bubble_label is not None:
             self.bubble_label.hide()
 
+    def show_break_overlay(self, duration_seconds: int = 30) -> None:
+        """Show the fullscreen forced-break overlay if not already visible."""
+
+        if self.break_overlay is not None and self.break_overlay.isVisible():
+            return
+
+        # Create as a top-level window (no parent) so showFullScreen() covers
+        # the entire screen and is not clipped to the main window.
+        self.break_overlay = BreakOverlayWindow(duration_seconds=duration_seconds)
+        self.break_overlay.closed.connect(self._on_break_overlay_closed)
+        self.break_overlay.showFullScreen()
+        self.break_overlay.raise_()
+        self.break_overlay.activateWindow()
+
+    def _on_break_overlay_closed(self) -> None:
+        """Clear reference when the forced-break overlay is closed."""
+
+        self.break_overlay = None
+
     def _on_break_time_changed(self, _value: int) -> None:
         """Update the break reminder interval from hours/minutes/seconds."""
 
@@ -1351,6 +1481,9 @@ class VisionMateWindow(QWidget):
                         ),
                         timeout=10,
                     )
+
+                    # Also show the fullscreen forced-break overlay for 30 seconds.
+                    self.show_break_overlay(duration_seconds=30)
 
                 elif event_name == "blink_rate_update":
                     bpm = payload.get("blink_rate_bpm")

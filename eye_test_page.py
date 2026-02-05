@@ -355,6 +355,10 @@ class EyeTestPage(QWidget):
             self._countdown_timer.stop()
             self._remaining_ms = 0
             self._timeout_reached = True
+            # Hide the word once the viewing time is over; the user can still
+            # answer from memory using the input box and must press Submit or
+            # Skip before the test moves to the next question.
+            self._content_label.clear()
             self._update_timer_label()
 
     def _update_timer_label(self) -> None:

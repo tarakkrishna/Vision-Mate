@@ -1,0 +1,384 @@
+[
+  {
+    "type": "vision_test",
+    "timestamp": "2026-02-05T09:40:24",
+    "responses": [
+      {
+        "index": 1,
+        "type": "text",
+        "difficulty": "Easy",
+        "target": "F",
+        "user_input": "F",
+        "duration_sec": 5.0,
+        "correct": true,
+        "skipped": false,
+        "from_timeout": true,
+        "answer_timestamp": "2026-02-05T09:40:04"
+      },
+      {
+        "index": 2,
+        "type": "text",
+        "difficulty": "Easy",
+        "target": "C",
+        "user_input": "C",
+        "duration_sec": 5.0,
+        "correct": true,
+        "skipped": false,
+        "from_timeout": false,
+        "answer_timestamp": "2026-02-05T09:40:06"
+      },
+      {
+        "index": 3,
+        "type": "text",
+        "difficulty": "Easy",
+        "target": "F",
+        "user_input": "F",
+        "duration_sec": 5.0,
+        "correct": true,
+        "skipped": false,
+        "from_timeout": false,
+        "answer_timestamp": "2026-02-05T09:40:07"
+      },
+      {
+        "index": 4,
+        "type": "text",
+        "difficulty": "Easy",
+        "target": "CAT",
+        "user_input": "CAT",
+        "duration_sec": 5.0,
+        "correct": true,
+        "skipped": false,
+        "from_timeout": false,
+        "answer_timestamp": "2026-02-05T09:40:08"
+      },
+      {
+        "index": 5,
+        "type": "text",
+        "difficulty": "Medium",
+        "target": "REST",
+        "user_input": "REST",
+        "duration_sec": 5.0,
+        "correct": true,
+        "skipped": false,
+        "from_timeout": false,
+        "answer_timestamp": "2026-02-05T09:40:10"
+      },
+      {
+        "index": 6,
+        "type": "text",
+        "difficulty": "Medium",
+        "target": "LIGHT",
+        "user_input": "LIGHT",
+        "duration_sec": 5.0,
+        "correct": true,
+        "skipped": false,
+        "from_timeout": true,
+        "answer_timestamp": "2026-02-05T09:40:17"
+      },
+      {
+        "index": 7,
+        "type": "text",
+        "difficulty": "Medium",
+        "target": "REST",
+        "user_input": "REST",
+        "duration_sec": 5.0,
+        "correct": true,
+        "skipped": false,
+        "from_timeout": false,
+        "answer_timestamp": "2026-02-05T09:40:18"
+      },
+      {
+        "index": 8,
+        "type": "text",
+        "difficulty": "Hard",
+        "target": "MOUSE",
+        "user_input": "MOUSE",
+        "duration_sec": 5.0,
+        "correct": true,
+        "skipped": false,
+        "from_timeout": false,
+        "answer_timestamp": "2026-02-05T09:40:20"
+      },
+      {
+        "index": 9,
+        "type": "text",
+        "difficulty": "Hard",
+        "target": "LAPTOP",
+        "user_input": "LAPTOP",
+        "duration_sec": 5.0,
+        "correct": true,
+        "skipped": false,
+        "from_timeout": false,
+        "answer_timestamp": "2026-02-05T09:40:22"
+      },
+      {
+        "index": 10,
+        "type": "text",
+        "difficulty": "Hard",
+        "target": "HEALTH",
+        "user_input": "HEALTH",
+        "duration_sec": 5.0,
+        "correct": true,
+        "skipped": false,
+        "from_timeout": false,
+        "answer_timestamp": "2026-02-05T09:40:24"
+      }
+    ],
+    "summary": {
+      "total_items": 10,
+      "correct_items": 10,
+      "clarity_percentage": 100.0,
+      "classification": "Good",
+      "per_level": {
+        "Easy": {
+          "total": 4,
+          "correct": 4,
+          "accuracy_pct": 100.0
+        },
+        "Medium": {
+          "total": 3,
+          "correct": 3,
+          "accuracy_pct": 100.0
+        },
+        "Hard": {
+          "total": 3,
+          "correct": 3,
+          "accuracy_pct": 100.0
+        }
+      }
+    }
+  },
+  {
+    "type": "monitoring_session",
+    "start_time": "2026-02-05T09:39:47",
+    "end_time": "2026-02-05T09:44:07",
+    "total_monitor_seconds": 260,
+    "too_close_events": 8,
+    "break_alerts": 0,
+    "avg_blink_rate_per_minute": 2.08,
+    "total_blinks": 9,
+    "poor_posture_seconds": 206.6,
+    "poor_posture_alerts": 1
+  },
+  {
+    "type": "vision_test",
+    "timestamp": "2026-02-05T10:44:09",
+    "responses": [
+      {
+        "index": 1,
+        "type": "text",
+        "difficulty": "Easy",
+        "target": "DOG",
+        "user_input": "DOG",
+        "duration_sec": 5.0,
+        "correct": true,
+        "skipped": false,
+        "from_timeout": true,
+        "answer_timestamp": "2026-02-05T10:43:53"
+      },
+      {
+        "index": 2,
+        "type": "text",
+        "difficulty": "Easy",
+        "target": "C",
+        "user_input": "C",
+        "duration_sec": 5.0,
+        "correct": true,
+        "skipped": false,
+        "from_timeout": false,
+        "answer_timestamp": "2026-02-05T10:43:55"
+      },
+      {
+        "index": 3,
+        "type": "text",
+        "difficulty": "Easy",
+        "target": "EYE",
+        "user_input": "EYE",
+        "duration_sec": 5.0,
+        "correct": true,
+        "skipped": false,
+        "from_timeout": false,
+        "answer_timestamp": "2026-02-05T10:43:56"
+      },
+      {
+        "index": 4,
+        "type": "text",
+        "difficulty": "Easy",
+        "target": "DOG",
+        "user_input": "DOG",
+        "duration_sec": 5.0,
+        "correct": true,
+        "skipped": false,
+        "from_timeout": false,
+        "answer_timestamp": "2026-02-05T10:43:57"
+      },
+      {
+        "index": 5,
+        "type": "text",
+        "difficulty": "Medium",
+        "target": "TREE",
+        "user_input": "TREE",
+        "duration_sec": 5.0,
+        "correct": true,
+        "skipped": false,
+        "from_timeout": false,
+        "answer_timestamp": "2026-02-05T10:43:58"
+      },
+      {
+        "index": 6,
+        "type": "text",
+        "difficulty": "Medium",
+        "target": "BREAK",
+        "user_input": "BREAK",
+        "duration_sec": 5.0,
+        "correct": true,
+        "skipped": false,
+        "from_timeout": false,
+        "answer_timestamp": "2026-02-05T10:44:00"
+      },
+      {
+        "index": 7,
+        "type": "text",
+        "difficulty": "Medium",
+        "target": "BREAK",
+        "user_input": "BREAK",
+        "duration_sec": 5.0,
+        "correct": true,
+        "skipped": false,
+        "from_timeout": false,
+        "answer_timestamp": "2026-02-05T10:44:02"
+      },
+      {
+        "index": 8,
+        "type": "text",
+        "difficulty": "Hard",
+        "target": "LAPTOP",
+        "user_input": "LAPTOP",
+        "duration_sec": 5.0,
+        "correct": true,
+        "skipped": false,
+        "from_timeout": false,
+        "answer_timestamp": "2026-02-05T10:44:04"
+      },
+      {
+        "index": 9,
+        "type": "text",
+        "difficulty": "Hard",
+        "target": "HEALTH",
+        "user_input": "HEALTH",
+        "duration_sec": 5.0,
+        "correct": true,
+        "skipped": false,
+        "from_timeout": false,
+        "answer_timestamp": "2026-02-05T10:44:06"
+      },
+      {
+        "index": 10,
+        "type": "text",
+        "difficulty": "Hard",
+        "target": "LAPTOP",
+        "user_input": "LAPTOP",
+        "duration_sec": 5.0,
+        "correct": true,
+        "skipped": false,
+        "from_timeout": false,
+        "answer_timestamp": "2026-02-05T10:44:09"
+      }
+    ],
+    "summary": {
+      "total_items": 10,
+      "correct_items": 10,
+      "clarity_percentage": 100.0,
+      "classification": "Good",
+      "per_level": {
+        "Easy": {
+          "total": 4,
+          "correct": 4,
+          "accuracy_pct": 100.0
+        },
+        "Medium": {
+          "total": 3,
+          "correct": 3,
+          "accuracy_pct": 100.0
+        },
+        "Hard": {
+          "total": 3,
+          "correct": 3,
+          "accuracy_pct": 100.0
+        }
+      }
+    }
+  },
+  {
+    "type": "monitoring_session",
+    "start_time": "2026-02-05T10:43:05",
+    "end_time": "2026-02-05T10:44:42",
+    "total_monitor_seconds": 98,
+    "too_close_events": 0,
+    "break_alerts": 7,
+    "avg_blink_rate_per_minute": 1.23,
+    "total_blinks": 2,
+    "poor_posture_seconds": 83.7,
+    "poor_posture_alerts": 1
+  },
+  {
+    "type": "monitoring_session",
+    "start_time": "2026-02-05T10:54:03",
+    "end_time": "2026-02-05T10:54:35",
+    "total_monitor_seconds": 31,
+    "too_close_events": 0,
+    "break_alerts": 8,
+    "avg_blink_rate_per_minute": 0.0,
+    "total_blinks": 0,
+    "poor_posture_seconds": 28.6,
+    "poor_posture_alerts": 1
+  },
+  {
+    "type": "monitoring_session",
+    "start_time": "2026-02-05T11:00:31",
+    "end_time": "2026-02-05T11:00:51",
+    "total_monitor_seconds": 20,
+    "too_close_events": 0,
+    "break_alerts": 5,
+    "avg_blink_rate_per_minute": 0.0,
+    "total_blinks": 0,
+    "poor_posture_seconds": 16.8,
+    "poor_posture_alerts": 1
+  },
+  {
+    "type": "monitoring_session",
+    "start_time": "2026-02-05T11:05:28",
+    "end_time": "2026-02-05T11:05:52",
+    "total_monitor_seconds": 24,
+    "too_close_events": 0,
+    "break_alerts": 4,
+    "avg_blink_rate_per_minute": 0.0,
+    "total_blinks": 0,
+    "poor_posture_seconds": 22.2,
+    "poor_posture_alerts": 1
+  },
+  {
+    "type": "monitoring_session",
+    "start_time": "2026-02-05T11:13:18",
+    "end_time": "2026-02-05T11:13:40",
+    "total_monitor_seconds": 22,
+    "too_close_events": 2,
+    "break_alerts": 3,
+    "avg_blink_rate_per_minute": 8.05,
+    "total_blinks": 3,
+    "poor_posture_seconds": 2.0,
+    "poor_posture_alerts": 0
+  },
+  {
+    "type": "monitoring_session",
+    "start_time": "2026-02-05T11:30:33",
+    "end_time": "2026-02-05T11:31:53",
+    "total_monitor_seconds": 79,
+    "too_close_events": 1,
+    "break_alerts": 13,
+    "avg_blink_rate_per_minute": 0.0,
+    "total_blinks": 0,
+    "poor_posture_seconds": 75.1,
+    "poor_posture_alerts": 1
+  }
+]
